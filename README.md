@@ -44,17 +44,21 @@ Group bonus points:
 |:---:|:----------------------------|:------------:|:-------------------------------------------------------|
 | 1   | Mean filter                 | +0.2         | Bonous for complete the Mean Filter code first         |
 | 2   | Bilateral Filter            | +0.3         | Bonous for complete the Bilateral Filter code first    |
+| 3   | Edge Detection              | +0.2         | Bonous for complete the Edge Detection code first      |
 
 ## Contributions
 
 This table details the contributions backed up in this repository:
 
-| No. | File Name / Code Snippet | Topic / Description   | Contributor      | Date / Week & Slot |
-|:---:|:-------------------------|:----------------------|:-----------------|:-------------------|
-| 1   | `workshop_1.py`          | Workshop 1 Exercises  | Huỳnh Quốc Việt  | Week 2 Slot 4      |
-| 2   | `mean_filter.py`         | Mean Filter           | Ngô Hoài Nam     | Week 2 Slot 4      |
-| 3   | `median_filter.py`       | Median Filter         | Ngô Hoài Nam     | Week 2 Slot 4      |
-| 4   | `gaussian_smoothing.py`  | Gaussian Smoothing    | Ngô Hoài Nam     | Week 2 Slot 4      |
-| 5   | `bilateral_filter.py`    | Bilateral Filter      | Ngô Hoài Nam     | Week 2 Slot 4      |
+| No. | File Name / Code Snippet       | Topic / Description     | Contributor            | Date / Week & Slot |
+|:---:|:-------------------------------|:------------------------|:-----------------------|:-------------------|
+| 1   | `workshop_1.py`                | Workshop 1 Exercises    | Huỳnh Quốc Việt        | Week 2 Slot 4      |
+| 2   | `mean_filter.py`               | Mean Filter             | Ngô Hoài Nam           | Week 2 Slot 4      |
+| 3   | `median_filter.py`             | Median Filter           | Ngô Hoài Nam           | Week 2 Slot 4      |
+| 4   | `gaussian_smoothing.py`        | Gaussian Smoothing      | Ngô Hoài Nam           | Week 2 Slot 4      |
+| 5   | `bilateral_filter.py`          | Bilateral Filter        | Ngô Hoài Nam           | Week 2 Slot 4      |
+| 6   | `image_filtering.py`           | Fourier transforms      | Lê Nguyễn Gia Hưng     | Week 3 Slot 5      |
+| 7   | `edge_detection.ipynb`         | Fourier transforms      | Hoàng Phạm Gia Bảo     | Week 3 Slot 5      |
+| 8   | `image_reconstruction.ipynb`   | Fourier transforms      | Ngô Hoài Nam           | Week 3 Slot 5      |
 
 [↑ Return](#cpv301-group)
