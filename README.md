@@ -1,6 +1,6 @@
-# CPV301-GROUP
+# CPV301 GROUP 3
 
-This repository serves as a backup for Group 6's code and materials for the CPV301 (Computer Vision) subject at FPT University HCMC.
+This repository serves as a backup for Group 3's code and materials for the CPV301 (Computer Vision) subject at FPT University HCMC.
 
 ![Last Commit](https://img.shields.io/badge/last%20commit-today-555555.svg)
 ![Python Version](https://img.shields.io/badge/python-100.0%25-blue.svg)
