@@ -36,6 +36,7 @@ Detailed scores for assignments and workshops:
 | No. | Assignment / Workshop | Score | Reason / Source                          |
 |:---:|:----------------------|:-----:|:-----------------------------------------|
 | 1   | Workshop 1            | 10    | Full completion of workshop requirements |
+| 2   | Workshop 2            | 10    | Full completion of workshop requirements |
 
 ### Bonus Points
 Group bonus points:
@@ -60,5 +61,6 @@ This table details the contributions backed up in this repository:
 | 6   | `image_filtering.py`           | Fourier transforms      | Lê Nguyễn Gia Hưng     | Week 3 Slot 5      |
 | 7   | `edge_detection.ipynb`         | Fourier transforms      | Hoàng Phạm Gia Bảo     | Week 3 Slot 5      |
 | 8   | `image_reconstruction.ipynb`   | Fourier transforms      | Ngô Hoài Nam           | Week 3 Slot 5      |
+| 9   | `workshop_2.py`                | Workshop 2 Exercises    | Dương Nguyên Bình      | Week 3 Slot 6      |
 
 [↑ Return](#cpv301-group)
