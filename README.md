@@ -48,6 +48,8 @@ Group bonus points:
 | 1   | Mean filter                 | +0.2         | Bonous for complete the Mean Filter code first         |
 | 2   | Bilateral Filter            | +0.3         | Bonous for complete the Bilateral Filter code first    |
 | 3   | Edge Detection              | +0.2         | Bonous for complete the Edge Detection code first      |
+| 4   | Parallax Removal            | +0.5         | Bonous for complete the Parallax Removal code first    |
+|     | **Total**                   | **+1.2**     |                                                        |
 
 ## Contributions
 
@@ -64,7 +66,10 @@ This table details the contributions backed up in this repository:
 | 7   | `edge_detection.ipynb`         | Fourier transforms      | Hoàng Phạm Gia Bảo     | Week 3 Slot 5      |
 | 8   | `image_reconstruction.ipynb`   | Fourier transforms      | Ngô Hoài Nam           | Week 3 Slot 5      |
 | 9   | `workshop_2.py`                | Workshop 2 Exercises    | Dương Nguyên Bình      | Week 3 Slot 6      |
-| 9   | `workshop_3.py`                | Workshop 3 Exercises    | Ngô Hoài Nam           | Week 5 Slot 9      |
-| 9   | `workshop_4.py`                | Workshop 4 Exercises    | Hoàng Phạm Gia Bảo     | Week 5 Slot 9      |
+| 10  | `workshop_3.py`                | Workshop 3 Exercises    | Ngô Hoài Nam           | Week 5 Slot 9      |
+| 11  | `workshop_4.py`                | Workshop 4 Exercises    | Hoàng Phạm Gia Bảo     | Week 5 Slot 9      |
+| 11  | `workshop_5.py`                | Workshop 5 Exercises    | Huỳnh Quốc Việt        | -                  |
+| 12  | `workshop_6.py`                | Workshop 6 Exercises    | Võ Tấn Phát            | -                  |
+| 12  | `parallax_removal.ipynb`       | Motion                  | Lê Nguyễn Gia Hưng     | Week 6 Slot 12     |
 
 [↑ Return](#cpv301-group)
