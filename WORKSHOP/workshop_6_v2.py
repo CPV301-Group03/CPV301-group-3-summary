@@ -8,7 +8,7 @@ import os
 class MultiImageStitcherApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Workshop #2: Multi-Image Stitching (v2)")
+        self.root.title("Workshop_6 : Multi-Image Stitching (v2)")
         self.root.geometry("1100x800")
 
         # Biến lưu trữ dữ liệu
@@ -132,45 +132,55 @@ class MultiImageStitcherApp:
         self.final_contours = [] # Reset danh sách contours
         images = [cv2.imread(path) for path in self.image_paths]
         
-        result, contours = self.stitch_multiple_images(images)
+        # === THAY ĐỔI LỚN BẮT ĐẦU TỪ ĐÂY ===
+        result, self.final_contours = self.stitch_multiple_images(images)
 
         if result is None:
             messagebox.showerror("Thất bại", "Quá trình ghép ảnh thất bại.")
         else:
             self.stitched_image = result
-            self.final_contours = contours
-            self.create_border_image() # Tạo ảnh có đường viền
+            self.create_border_image()
             self.btn_save.config(state=tk.NORMAL)
-            self.chk_borders.config(state=tk.NORMAL) # Kích hoạt checkbox
+            self.chk_borders.config(state=tk.NORMAL)
             self.status_label.config(text="Ghép ảnh thành công!")
-            self.update_display() # Hiển thị kết quả
-
-    # === THAY ĐỔI 3: HÀM VẼ ĐƯỜNG VIỀN ===
+            self.update_display()
+    
     def create_border_image(self):
-        """Tạo một bản sao của ảnh đã ghép và vẽ các đường viền lên đó."""
         if self.stitched_image is None or not self.final_contours:
+            self.border_image = None
             return
         
         self.border_image = self.stitched_image.copy()
-        # Danh sách màu sắc để các đường viền khác nhau
         colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (0, 255, 255), (255, 0, 255)]
         
         for i, contour in enumerate(self.final_contours):
-            color = colors[i % len(colors)]
-            cv2.drawContours(self.border_image, [contour], -1, color, 3) # Vẽ với độ dày là 3
+            if contour is not None:
+                color = colors[i % len(colors)]
+                cv2.drawContours(self.border_image, [contour], -1, color, 2) # Tăng độ dày
 
-    # === THAY ĐỔI 4: SỬA HÀM GHÉP NHIỀU ẢNH ===
-    def stitch_multiple_images(self, image_list):
-        panorama = image_list[0]
-        all_contours = []
+    def save_result(self):
+        if self.stitched_image is None: return
+        image_to_save = self.border_image if self.show_borders_var.get() and self.border_image is not None else self.stitched_image
+        save_path = filedialog.asksaveasfilename(defaultextension=".jpg", filetypes=[("JPEG", "*.jpg"), ("PNG", "*.png")])
+        if save_path:
+            cv2.imwrite(save_path, image_to_save)
+            messagebox.showinfo("Thành công", f"Đã lưu kết quả tại:\n{save_path}")
 
-        for i in range(1, len(image_list)):
-            next_image = image_list[i]
-            self.status_label.config(text=f"Đang ghép ảnh {i+1}/{len(image_list)}...")
+    # === HÀM GHÉP NHIỀU ẢNH ĐƯỢC VIẾT LẠI HOÀN TOÀN ===
+    def stitch_multiple_images(self, images):
+        num_images = len(images)
+        panorama = images[0]
+        
+        # Danh sách các ma trận biến đổi từ mỗi ảnh gốc đến panorama hiện tại
+        homography_matrices = [np.identity(3, dtype=np.float32)]
+
+        for i in range(1, num_images):
+            next_image = images[i]
+            self.status_label.config(text=f"Đang ghép ảnh {i+1}/{num_images}...")
             self.root.update_idletasks()
             
-            # Hàm stitch_images giờ sẽ trả về cả các contour
-            new_panorama, left_contour, right_contour = self.stitch_images(next_image, panorama)
+            # Hàm này giờ trả về panorama mới và các ma trận biến đổi
+            new_panorama, H_left, H_right = self.stitch_images(next_image, panorama)
             
             if new_panorama is None:
                 self.status_label.config(text=f"Ghép ảnh {i+1} thất bại. Dừng lại.")
@@ -178,20 +188,46 @@ class MultiImageStitcherApp:
             
             panorama = new_panorama
             
-            if i == 1: # Ở lần lặp đầu tiên, thêm contour của cả ảnh trái và phải
-                all_contours.append(left_contour)
-            all_contours.append(right_contour)
-        
-        return panorama, all_contours
+            # Cập nhật tất cả các ma trận homography cũ
+            for j in range(len(homography_matrices)):
+                homography_matrices[j] = H_left.dot(homography_matrices[j])
+            
+            # Thêm ma trận mới cho ảnh vừa ghép
+            homography_matrices.append(H_right)
 
-    # === THAY ĐỔI 5: SỬA HÀM GHÉP 2 ẢNH ĐỂ TRẢ VỀ CONTOUR ===
+        # Sau khi có panorama cuối cùng và tất cả các ma trận biến đổi cuối cùng
+        # chúng ta sẽ tính toán các đường viền
+        final_contours = []
+        final_pano_size = (panorama.shape[1], panorama.shape[0])
+
+        for i in range(num_images):
+            original_image = images[i]
+            h, w = original_image.shape[:2]
+            
+            # Tạo đường viền của ảnh gốc (là một hình chữ nhật)
+            corners = np.float32([[0, 0], [0, h-1], [w-1, h-1], [w-1, 0]]).reshape(-1, 1, 2)
+            
+            # Áp dụng ma trận biến đổi cuối cùng để tìm vị trí mới của các góc
+            transformed_corners = cv2.perspectiveTransform(corners, homography_matrices[i])
+            
+            # Chuyển đổi thành contour và thêm vào danh sách
+            final_contours.append(np.int32(transformed_corners))
+            
+        return panorama, final_contours
+
+
+    # === HÀM GHÉP 2 ẢNH ĐƯỢC SỬA ĐỔI ĐỂ TRẢ VỀ MA TRẬN BIẾN ĐỔI ===
     def stitch_images(self, img_right, img_left):
+        # Bước tìm keypoints và homography giữ nguyên
         orb = cv2.ORB_create(nfeatures=2000)
         keypoints_left, descriptors_left = orb.detectAndCompute(img_left, None)
         keypoints_right, descriptors_right = orb.detectAndCompute(img_right, None)
         if descriptors_left is None or descriptors_right is None: return None, None, None
         matcher = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-        matches = sorted(matcher.match(descriptors_right, descriptors_left), key=lambda x: x.distance)
+        try:
+            matches = sorted(matcher.match(descriptors_right, descriptors_left), key=lambda x: x.distance)
+        except cv2.error:
+            return None, None, None
         matches = matches[:int(len(matches) * 0.20)]
         if len(matches) < 10: return None, None, None
         src_pts = np.float32([keypoints_right[m.queryIdx].pt for m in matches]).reshape(-1, 1, 2)
@@ -199,27 +235,29 @@ class MultiImageStitcherApp:
         M, _ = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC, 5.0)
         if M is None: return None, None, None
 
+        # Bước tính toán khung ảnh chung và ma trận dịch chuyển
         h_left, w_left = img_left.shape[:2]
         h_right, w_right = img_right.shape[:2]
         corners_left = np.float32([[0, 0], [0, h_left], [w_left, h_left], [w_left, 0]]).reshape(-1, 1, 2)
         corners_right_transformed = cv2.perspectiveTransform(np.float32([[0, 0], [0, h_right], [w_right, h_right], [w_right, 0]]).reshape(-1, 1, 2), M)
         all_corners = np.concatenate((corners_left, corners_right_transformed), axis=0)
-        [x_min, y_min] = np.int32(all_corners.min(axis=0).ravel() - 0.5)
-        [x_max, y_max] = np.int32(all_corners.max(axis=0).ravel() + 0.5)
+        x_min, y_min = np.int32(all_corners.min(axis=0).ravel() - 0.5)
+        x_max, y_max = np.int32(all_corners.max(axis=0).ravel() + 0.5)
         
         H_translation = np.array([[1, 0, -x_min], [0, 1, -y_min], [0, 0, 1]], dtype=np.float32)
+        
+        # Tính toán ma trận biến đổi cuối cùng cho mỗi ảnh
+        H_left = H_translation.copy()
+        H_right = H_translation.dot(M)
         
         output_width = x_max - x_min
         output_height = y_max - y_min
 
-        warped_left = cv2.warpPerspective(img_left, H_translation, (output_width, output_height))
-        warped_right = cv2.warpPerspective(img_right, H_translation.dot(M), (output_width, output_height))
+        # Warp các ảnh và blending
+        warped_left = cv2.warpPerspective(img_left, H_left, (output_width, output_height))
+        warped_right = cv2.warpPerspective(img_right, H_right, (output_width, output_height))
         
-        # --- Lấy contour của mỗi ảnh đã được warp ---
-        contour_left = self.get_contour_from_image(warped_left)
-        contour_right = self.get_contour_from_image(warped_right)
-
-        # Logic blending giữ nguyên như trước
+        # Logic blending (giữ nguyên)
         result_pano = warped_left.copy()
         gray_right = cv2.cvtColor(warped_right, cv2.COLOR_BGR2GRAY)
         _, mask_right = cv2.threshold(gray_right, 0, 255, cv2.THRESH_BINARY)
@@ -233,46 +271,38 @@ class MultiImageStitcherApp:
             x_min_roi, x_max_roi = np.min(cols), np.max(cols)
             left_roi = warped_left[y_min_roi:y_max_roi+1, x_min_roi:x_max_roi+1]
             right_roi = warped_right[y_min_roi:y_max_roi+1, x_min_roi:x_max_roi+1]
-            overlap_roi_mask = overlap_mask[y_min_roi:y_max_roi+1, x_min_roi:x_max_roi+1]
             roi_height, roi_width = left_roi.shape[:2]
             if roi_width > 0:
                 alpha_gradient = np.tile(np.linspace(1.0, 0.0, roi_width), (roi_height, 1))
                 alpha_gradient_3ch = cv2.cvtColor(alpha_gradient.astype(np.float32), cv2.COLOR_GRAY2BGR)
                 blended_roi = (left_roi.astype(np.float32) * alpha_gradient_3ch + right_roi.astype(np.float32) * (1.0 - alpha_gradient_3ch)).astype(np.uint8)
                 target_roi = result_pano[y_min_roi:y_max_roi+1, x_min_roi:x_max_roi+1]
+                overlap_roi_mask = overlap_mask[y_min_roi:y_max_roi+1, x_min_roi:x_max_roi+1]
                 where_mask = np.repeat(overlap_roi_mask[:, :, np.newaxis], 3, axis=2) > 0
                 np.copyto(target_roi, blended_roi, where=where_mask)
         
         final_pano = self.crop_black_border(result_pano)
 
-        # Trả về cả panorama và các contour
-        return final_pano, contour_left, contour_right
+        # Trả về panorama mới và các ma trận biến đổi đã được áp dụng
+        return final_pano, H_left, H_right
 
     def get_contour_from_image(self, image):
-        """Hàm phụ để tìm contour lớn nhất từ một ảnh."""
+        # (Hàm này không còn được dùng trực tiếp trong luồng chính, nhưng giữ lại cũng không sao)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        _, thresh = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if contours: return max(contours, key=cv2.contourArea)
+        return None
+        
+    def crop_black_border(self, image):
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         _, thresh = cv2.threshold(gray, 1, 255, cv2.THRESH_BINARY)
         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         if contours:
-            return max(contours, key=cv2.contourArea)
-        return None
-        
-    def crop_black_border(self, image):
-        contour = self.get_contour_from_image(image)
-        if contour is not None:
-            x, y, w, h = cv2.boundingRect(contour)
-            return image[y:y + h, x:x + w]
+            x, y, w, h = cv2.boundingRect(max(contours, key=cv2.contourArea))
+            if w > 0 and h > 0: return image[y:y + h, x:x + w]
         return image
-
-    def save_result(self):
-        if self.stitched_image is None: return
-        # Hỏi người dùng muốn lưu ảnh nào
-        image_to_save = self.border_image if self.show_borders_var.get() else self.stitched_image
-        save_path = filedialog.asksaveasfilename(defaultextension=".jpg", filetypes=[("JPEG", "*.jpg"), ("PNG", "*.png")])
-        if save_path:
-            cv2.imwrite(save_path, image_to_save)
-            messagebox.showinfo("Thành công", f"Đã lưu kết quả tại:\n{save_path}")
-
+    
 if __name__ == "__main__":
     root = tk.Tk()
     app = MultiImageStitcherApp(root)
