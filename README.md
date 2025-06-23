@@ -71,5 +71,6 @@ This table details the contributions backed up in this repository:
 | 11  | `workshop_5.py`                | Workshop 5 Exercises    | Huỳnh Quốc Việt        | -                  |
 | 12  | `workshop_6.py`                | Workshop 6 Exercises    | Võ Tấn Phát            | -                  |
 | 12  | `parallax_removal.ipynb`       | Motion                  | Lê Nguyễn Gia Hưng     | Week 6 Slot 12     |
+| 13  | `face_detection_HOG.py`        | Face Detection          | Huỳnh Quốc Việt        | Week 7 Slot 15     |
 
 [↑ Return](#cpv301-group)
