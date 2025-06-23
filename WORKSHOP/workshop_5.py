@@ -29,7 +29,7 @@ def align_images(img1, img2):
         src_pts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
         dst_pts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
         ransacReprojThreshold = 5.0
-        maxIters = 2000 #Rêpat
+        maxIters = 2000 #Repeat
         confidence = 0.995
 
         H, mask = cv2.findHomography(
