@@ -18,9 +18,6 @@ Note: These badges are placeholders. To make them dynamic, you would:
 ## 📖 Table of Contents
 
 *   [Overview](#-overview)
-*   [🚀 Getting Started](#-getting-started)
-    *   [Prerequisites](#prerequisites)
-    *   [Installation](#installation)
 *   [🏆 Course Scores](#-course-scores)
     *   [Group Scores](#group-scores)
     *   [Bonus Points](#bonus-points)
@@ -42,36 +39,6 @@ This repository contains all the code, notebooks, and related materials develope
 *   Võ Tấn Phát
 *   Trương Phước Sang
 *   Dương Nguyên Bình
-
----
-
-## 🚀 Getting Started
-
-Follow these instructions to get a local copy of the project up and running.
-
-### Prerequisites
-
-Ensure you have Python 3.8+ installed on your system. You will also need `pip` for package management.
-
-### Installation
-
-1.  **Clone the repository:**
-    ```sh
-    git clone https://github.com/your-username/your-repository-name.git
-    cd your-repository-name
-    ```
-
-2.  **Install the required libraries:**
-    We recommend using a virtual environment to avoid conflicts.
-    ```sh
-    # Create and activate a virtual environment (optional but recommended)
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-
-    # Install dependencies
-    pip install -r requirements.txt
-    ```
-    > **Note:** A `requirements.txt` file should be created containing necessary libraries like `opencv-python`, `numpy`, `matplotlib`, and `scikit-image`.
 
 ---
 
