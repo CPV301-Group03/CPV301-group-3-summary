@@ -1,0 +1,64 @@
+# canny_edge_detector.py
+
+import cv2
+import numpy as np
+import requests
+import matplotlib.pyplot as plt
+
+def load_image_from_url(url: str):
+    """Tải ảnh từ URL."""
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        image_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+        image = cv2.imdecode(image_array, cv2.IMREAD_COLOR)
+        if image is None: raise IOError("Không thể giải mã ảnh.")
+        return image
+    except Exception as e:
+        print(f"Lỗi tải ảnh: {e}")
+        return None
+
+if __name__ == "__main__":
+    IMAGE_URL = "https://images.pexels.com/photos/34950/pexels-photo.jpg"
+    
+    print("Đang tải ảnh và xử lý...")
+    image = load_image_from_url(IMAGE_URL)
+
+    if image is not None:
+        # Chuyển ảnh sang ảnh xám
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        
+        # Làm mờ để giảm nhiễu, đây là bước đầu tiên của thuật toán Canny
+        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+
+        # 1. Áp dụng Canny Edge Detector
+        # cv2.Canny(image, threshold1, threshold2)
+        # - threshold1: Ngưỡng dưới.
+        # - threshold2: Ngưỡng trên.
+        # Cạnh có gradient > threshold2 chắc chắn là cạnh.
+        # Cạnh có gradient < threshold1 chắc chắn không phải cạnh.
+        # Cạnh ở giữa hai ngưỡng chỉ được giữ lại nếu nó nối với một cạnh chắc chắn.
+        # Đây gọi là Hysteresis Thresholding.
+        canny_edges = cv2.Canny(blurred, threshold1=50, threshold2=150)
+
+        # 2. Hiển thị kết quả
+        plt.figure(figsize=(18, 6))
+        plt.suptitle("Phát hiện cạnh bằng Thuật toán Canny", fontsize=16)
+
+        plt.subplot(1, 3, 1)
+        plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        plt.title('Ảnh Gốc')
+        plt.axis('off')
+
+        plt.subplot(1, 3, 2)
+        plt.imshow(blurred, cmap='gray')
+        plt.title('Ảnh sau khi làm mờ')
+        plt.axis('off')
+
+        plt.subplot(1, 3, 3)
+        plt.imshow(canny_edges, cmap='gray')
+        plt.title('Cạnh phát hiện bằng Canny')
+        plt.axis('off')
+        
+        plt.tight_layout()
+        plt.show()
