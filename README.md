@@ -10,7 +10,7 @@ Note: These badges are placeholders. To make them dynamic, you would:
 -->
 ![Python Version](https://img.shields.io/badge/Python-3.9+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Project Status](https://img.shields.io/badge/status-in%20progress-yellow.svg)
+![Project Status](https://img.shields.io/badge/status-completed-green.svg)
 
 
 ---
@@ -69,26 +69,38 @@ This section documents the group's performance in workshops and bonus activities
 
 ## 🤝 Contributions
 
-This table details the primary contributions from each group member.
+This table details the primary contributions from each group member, organized by topic.
 
-<!-- Note: Fixed inconsistent numbering and clarified topics for better readability. -->
-| No. | File / Notebook                | Topic / Description            | Contributor        | Date / Week & Slot |
-|:---:|:-------------------------------|:-------------------------------|:-------------------|:-------------------|
-| 1   | `workshop_1.py`                | Workshop 1 Exercises           | Huỳnh Quốc Việt    | Week 2, Slot 4     |
-| 2   | `mean_filter.py`               | Image Filtering: Mean          | Ngô Hoài Nam       | Week 2, Slot 4     |
-| 3   | `median_filter.py`             | Image Filtering: Median        | Ngô Hoài Nam       | Week 2, Slot 4     |
-| 4   | `gaussian_smoothing.py`        | Image Filtering: Gaussian      | Ngô Hoài Nam       | Week 2, Slot 4     |
-| 5   | `bilateral_filter.py`          | Image Filtering: Bilateral     | Ngô Hoài Nam       | Week 2, Slot 4     |
-| 6   | `image_filtering.py`           | Frequency Domain: Fourier      | Lê Nguyễn Gia Hưng | Week 3, Slot 5     |
-| 7   | `edge_detection.ipynb`         | Edge Detection Techniques      | Hoàng Phạm Gia Bảo | Week 3, Slot 5     |
-| 8   | `image_reconstruction.ipynb`   | Image Reconstruction           | Ngô Hoài Nam       | Week 3, Slot 5     |
-| 9   | `workshop_2.py`                | Workshop 2 Exercises           | Dương Nguyên Bình  | Week 3, Slot 6     |
-| 10  | `workshop_3.py`                | Workshop 3 Exercises           | Ngô Hoài Nam       | Week 5, Slot 9     |
-| 11  | `workshop_4.py`                | Workshop 4 Exercises           | Hoàng Phạm Gia Bảo | Week 5, Slot 9     |
-| 12  | `workshop_5.py`                | Workshop 5 Exercises           | Huỳnh Quốc Việt    | -                  |
-| 13  | `workshop_6.py`                | Workshop 6 Exercises           | Võ Tấn Phát        | -                  |
-| 14  | `parallax_removal.ipynb`       | Motion: Parallax Removal       | Lê Nguyễn Gia Hưng | Week 6, Slot 12    |
-| 15  | `face_detection_HOG.py`        | Object Detection: HOG Faces    | Huỳnh Quốc Việt    | Week 7, Slot 15    |
+| No. | File / Path                                       | Topic / Description                            | Contributor        |
+|:---:|:--------------------------------------------------|:-----------------------------------------------|:-------------------|
+| 1   | `01_linear_filtering/mean_filter.py`              | Image Filtering: Mean                          | Ngô Hoài Nam       |
+| 2   | `01_linear_filtering/median_filter.py`            | Image Filtering: Median                        | Ngô Hoài Nam       |
+| 3   | `01_linear_filtering/gaussian_smoothing.py`       | Image Filtering: Gaussian                      | Ngô Hoài Nam       |
+| 4   | `01_linear_filtering/bilateral_filter.py`         | Image Filtering: Bilateral                     | Ngô Hoài Nam       |
+| 5   | `02_fourier_transforms/fourier_filtering.py`      | Fourier Transform: Filtering                   | Lê Nguyễn Gia Hưng |
+| 6   | `02_fourier_transforms/fourier_edge_detection.py` | Fourier Transform: Edge Detection              | Hoàng Phạm Gia Bảo |
+| 7   | `02_fourier_transforms/fourier_reconstruction.py` | Fourier Transform: Reconstruction              | Ngô Hoài Nam       |
+| 8   | `03_geometric_transformations/transformation.py`  | Geometric Transforms: Demo                     | Everyone           |
+| 9   | `03_geometric_transformations/warping.py`         | Geometric Transforms: Warping Demo             | Everyone           |
+| 10  | `04_points_and_patches/harris_corner_detection.py`| Feature Detection: Harris Corner               | Everyone           |
+| 11  | `04_points_and_patches/hog_descriptor_visualization.py` | Feature Descriptor: HOG                        | Everyone           |
+| 12  | `04_points_and_patches/feature_matching_orb.py`   | Feature Matching: ORB                          | Everyone           |
+| 13  | `05_edges/canny_edge_detector.py`                 | Edge Detection: Canny                          | Everyone           |
+| 14  | `05_edges/gradient_edge_detectors.py`             | Edge Detection: Gradient Operators             | Everyone           |
+| 15  | `05_edges/laplacian_edge_detector.py`             | Edge Detection: Laplacian of Gaussian (LoG)    | Everyone           |
+| 16  | `06_lines/hough_line_detection.py`                | Line Detection: Hough Transform                | Huỳnh Quốc Việt    |
+| 17  | `06_lines/convolutional_line_detection.py`        | Line Detection: Convolution Kernels          | Võ Tấn Phát        |
+| 18  | `07_active_contours/active_contour_snakes.py`     | Segmentation: Active Contours (Snakes)         | Trương Phước Sang  |
+| 19  | `07_active_contours/active_contour_level_sets.py` | Segmentation: Active Contours (Level Sets)     | Dương Nguyên Bình  |
+| 20  | `08_split_and_merge/watershed_segmentation.py`    | Segmentation: Watershed                        | Everyone           |
+| 21  | `08_split_and_merge/graph_based_segmentation.py`  | Segmentation: Graph-Based                      | Everyone           |
+| 22  | `09_mean_shift_and_mode_finding/kmeans_color_segmentation.py` | Segmentation: K-Means Clustering     | Everyone           |
+| 23  | `09_mean_shift_and_mode_finding/meanshift_segmentation.py` | Segmentation: Mean Shift Clustering     | Everyone           |
+| 24  | `10_2d_and_3d_feature_based_alignment/panorama_stitching.py` | Alignment: Panorama Stitching       | Everyone           |
+| 25  | `11_motion_models/optical_flow.py`                | Motion: Optical Flow (Lucas-Kanade)            | Everyone           |
+| 26  | `11_motion_models/advanced_panorama.py`           | Motion: Advanced Panorama                      | Everyone           |
+| 27  | `11_motion_models/video_background_reconstruction.py` | Motion: Video Background Reconstruction | Everyone           |
+| 28  | `13_face_detection/face_detection_HOG.py`         | Object Detection: HOG Faces                    | Huỳnh Quốc Việt    |
 
 ---
 
