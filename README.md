@@ -21,7 +21,6 @@ Note: These badges are placeholders. To make them dynamic, you would:
 *   [🚀 Getting Started](#-getting-started)
     *   [Prerequisites](#prerequisites)
     *   [Installation](#installation)
-*   [📂 Project Structure](#-project-structure)
 *   [🏆 Course Scores](#-course-scores)
     *   [Group Scores](#group-scores)
     *   [Bonus Points](#bonus-points)
