@@ -10,7 +10,8 @@ Note: These badges are placeholders. To make them dynamic, you would:
 -->
 ![Python Version](https://img.shields.io/badge/Python-3.9+-blue.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Project Status](https://img.shields.io/badge/status-completed-green.svg)
+![Project Status](https://img.shields.io/badge/status-in%20progress-yellow.svg)
+
 
 ---
 
