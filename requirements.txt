@@ -1,0 +1,108 @@
+# CPV301 - Computer Vision Course Dependencies
+# This file contains all the required Python packages for the entire project
+
+# Core Computer Vision Libraries
+opencv-python>=4.5.0
+numpy>=1.19.0
+
+# Image Processing and Visualization
+matplotlib>=3.3.0
+pillow>=8.0.0
+
+# Scientific Computing and Machine Learning
+scikit-image>=0.18.0
+scikit-learn>=0.24.0
+
+# GUI Development
+# tkinter is usually included with Python, but if you need to install it separately:
+# tkinter (usually comes with Python)
+
+# Game Development (for Workshop 1)
+pygame>=2.0.0
+
+# HTTP Requests
+requests>=2.25.0
+
+# Python Standard Library (these are included with Python)
+# sys, math, os, threading, urllib.request - no installation needed
+
+# Optional: For Jupyter Notebook (Workshop 4)
+# jupyter>=1.0.0
+# ipython>=7.0.0
+
+# Development and Testing
+# pytest>=6.0.0  # For testing
+
+# ===============================================
+# Installation Instructions:
+# ===============================================
+# 1. Install all requirements:
+#    pip install -r requirements.txt
+#
+# 2. For conda users:
+#    conda install opencv numpy matplotlib pillow scikit-image scikit-learn pygame requests
+#
+# 3. For specific workshops:
+#    - Workshop 1: pygame, sys, math
+#    - Workshop 2: opencv-python, numpy, tkinter, PIL, matplotlib
+#    - Workshop 4: opencv-python, numpy, matplotlib, scikit-image, scikit-learn
+#    - Workshop 5: tkinter, opencv-python, numpy, PIL
+#    - Workshop 6: opencv-python, numpy, tkinter, PIL, os
+#    - Workshop 7: opencv-python, numpy, tkinter, PIL, os, threading
+#
+# 4. For src/ modules: opencv-python, numpy, matplotlib, requests, scikit-image
+#
+# ===============================================
+# Version Compatibility:
+# ===============================================
+# - Python 3.7 or higher is recommended
+# - OpenCV 4.x is recommended for best compatibility
+# - All packages are compatible with both Windows and Linux
+
+# ===============================================
+# Package Breakdown by Module:
+# ===============================================
+
+# 01_linear_filtering/
+# - opencv-python, numpy, requests, matplotlib
+
+# 02_fourier_transforms/
+# - opencv-python, numpy, requests, matplotlib
+
+# 03_geometric_transformations/
+# - opencv-python, numpy, requests, matplotlib
+
+# 04_points_and_patches/
+# - opencv-python, numpy, requests, matplotlib, scikit-image
+
+# 05_edges/
+# - opencv-python, numpy, requests, matplotlib
+
+# 06_lines/
+# - opencv-python, numpy, requests, matplotlib
+
+# 07_active_contours/
+# - opencv-python, numpy, matplotlib, scikit-image, requests
+
+# 08_split_and_merge/
+# - opencv-python, numpy, requests, matplotlib, scikit-image
+
+# 09_mean_shift_and_mode_finding/
+# - opencv-python, numpy, requests, matplotlib
+
+# 10_2d_and_3d_feature-based_alignment/
+# - opencv-python, numpy, requests, matplotlib
+
+# 11_motion_models/
+# - opencv-python, numpy, requests, matplotlib
+
+# 13_face_detection/
+# - opencv-python, numpy
+
+# WORKSHOP/
+# - Workshop 1: pygame, sys, math
+# - Workshop 2: opencv-python, numpy, tkinter, PIL, matplotlib
+# - Workshop 4: opencv-python, numpy, matplotlib, scikit-image, scikit-learn
+# - Workshop 5: tkinter, opencv-python, numpy, PIL
+# - Workshop 6: opencv-python, numpy, tkinter, PIL, os
+# - Workshop 7: opencv-python, numpy, tkinter, PIL, os, threading

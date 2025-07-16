@@ -101,6 +101,9 @@ This table details the primary contributions from each group member, organized b
 | 26  | `11_motion_models/advanced_panorama.py`           | Motion: Advanced Panorama                      | Everyone           |
 | 27  | `11_motion_models/video_background_reconstruction.py` | Motion: Video Background Reconstruction | Everyone           |
 | 28  | `13_face_detection/face_detection_HOG.py`         | Object Detection: HOG Faces                    | Huỳnh Quốc Việt    |
+| 29  | `workshop_7.py` | Face Detection using Haar Cascade Algorithm | Lê Nguyễn Gia Hưng           |
+| 30  | `workshop_8.py`         | Face Recognition using Eigenfaces                    | Trương Phước Sang    |
+
 
 ---
 
