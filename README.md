@@ -54,6 +54,10 @@ This section documents the group's performance in workshops and bonus activities
 | 2   | Workshop 2            | 10/10 | Full completion of workshop requirements |
 | 3   | Workshop 3            | 10/10 | Full completion of workshop requirements |
 | 4   | Workshop 4            | 10/10 | Full completion of workshop requirements |
+| 5   | Workshop 5            |  9/10 | Full completion of workshop requirements |
+| 6   | Workshop 6            |  8/10 | Full completion of workshop requirements |
+| 7   | Workshop 7            | 10/10 | Full completion of workshop requirements |
+| 8   | Workshop 8            | 10/10 | Full completion of workshop requirements |
 
 ### Bonus Points
 
