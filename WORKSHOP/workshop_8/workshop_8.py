@@ -4,7 +4,7 @@ import numpy as np
 from tkinter import Tk, filedialog, Button, Label, DISABLED, NORMAL
 from PIL import Image, ImageTk
 
-DATASET_PATH = "images"
+DATASET_PATH = "workshop\workshop_8\images"
 IMG_SIZE = (200, 200)
 CONFIDENCE_THRESHOLD = 4000
 
